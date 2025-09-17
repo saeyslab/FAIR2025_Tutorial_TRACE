@@ -68,21 +68,21 @@ def compute_embeddings(emb_names: list, filename: str, hd_data: pd.DataFrame, la
     for emb in emb_names:
         ## PCA
         if emb == 'pca' and not os.path.exists(filename+"_pca.csv"):
-            pca_emb = compute_pca(hd_data)
+            pca_emb = compute_pca(hd_data.values)
             pca_emb.to_csv(filename+"_pca.csv", index=False) 
             print('PCA embedding saved.')
         ## UMAP
         if emb == 'umap' and not os.path.exists(filename+"_umap.csv"):
-            umap_emb = compute_umap(hd_data)
+            umap_emb = compute_umap(hd_data.values)
             umap_emb.to_csv(filename+"_umap.csv", index=False)
             print('UMAP embedding saved.')
         ## t-SNE
         if emb == 'tsne' and not os.path.exists(filename+"_tsne.csv"):
-            tsne_emb = compute_tsne(hd_data)
+            tsne_emb = compute_tsne(hd_data.values)
             tsne_emb.to_csv(filename+"_tsne.csv", index=False)
             print('t-SNE embedding saved.')
         ## ViVAE
         if emb == 'vivae' and not os.path.exists(filename+"_vivae.csv"):
-            vivae_emb = compute_vivae(hd_data)
+            vivae_emb = compute_vivae(hd_data.values)
             vivae_emb.to_csv(filename+"_vivae.csv", index=False)
             print('ViVAE embedding saved.')

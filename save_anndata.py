@@ -24,7 +24,7 @@ def store_embeddings(embeddings, HD_data, metadata, fname):
     metadata_dict = {
         col: np.asarray(metadata[col].values, dtype=np.str_)
         if col == 'cell_type'
-        else np.asarray(metadata[col].values, dtype=np.int8)
+        else np.asarray(metadata[col].values, dtype=np.str_)
         if col == 'batch'
         else np.asarray(metadata[col].values, dtype=np.float32)
         for col in metadata.columns
@@ -62,6 +62,7 @@ def load_tracedata(fname, n_neighbours):
     if not os.path.exists(fname + '_TRACE.h5ad') and os.path.exists(fname + '_anndata.h5ad'):
         import sys
         sys.path.insert(1, '../TRACE-explainability/backend/')
+        sys.path.insert(1, '../TRACE-explainability/')
         from dataset import Dataset as TraceData
         d = ad.read_h5ad(fname + '_anndata.h5ad')
         trace_data = TraceData(
